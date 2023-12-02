@@ -5,48 +5,222 @@ body {
   background-image: url('./Temp/background2_1.jpg');
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat; 
-}
-
-#navbar {
-  background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo da barra de navegação */
-}
-
-#navbar a {
-  color: #333; /* Cor do texto dos links */
-}
-
-#navbar a:hover {
-  color: rgb(31, 119, 190); /* Cor do texto dos links ao passar o mouse */
-}
-
-.offcanvas-body {
-  background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo do offcanvas */
-}
-
-.navbar-toggler-icon {
-  background-color: rgb(0, 0, 0)252; /* Cor do ícone do botão de toggle */
+  background-repeat: no-repeat;
+  font-family: 'Oswald', sans-serif;  
 }
 
 .carrousel_background {
-
   background-image: url('./Temp/book_background.jpg');
 }
 
+.max-width-logo_image {
+  width: 80%;
+  height: auto;
+}
+
+.navbar {
+  background: linear-gradient(
+    45deg,
+    #999 5%,
+    #fff 10%,
+    #ccc 30%,
+    #ddd 50%,
+    #ccc 70%,
+    #fff 80%,
+    #999 95%
+  );
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-brand img {
+  width: 56px; 
+  height: 40px;
+  border-radius: 50%;
+}
+
+.navbar-nav .nav-link {
+  color: #000000 !important;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #000000 !important;
+}
+
+        
+.carousel-inner .carousel-item {
+  transition: transform 0.5s ease-in-out; 
+}
+
+.typeanimation{
+  --line_color : #000000;
+}
+
+.submit-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #000000;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 25px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #8e8e8e;
+  color: #ffffff;
+}
+
+.button{
+    position : relative ;
+    z-index : 0 ;
+    width : 200px ;
+    height : 50px ;
+    text-decoration : none ;
+    font-size : 14px ; 
+    font-weight : bold ;
+    color : var(--line_color) ;
+    letter-spacing : 2px ;
+    transition : all .3s ease ;
+}
+.button__text{
+    display : flex ;
+    justify-content : center ;
+    align-items : center ;
+    width : 100% ;
+    height : 100% ;
+}
+.button::before,
+.button::after,
+.button__text::before,
+.button__text::after{
+    content : '' ;
+    position : absolute ;
+    height : 3px ;
+    border-radius : 2px ;
+    background : var(--line_color) ;
+    transition : all .5s ease ;
+}
+.button::before{
+    top : 0 ;
+    left : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button::after{
+    top : 0 ;
+    right : 54px ;
+    width : 8px ;
+}
+.button__text::before{
+    bottom : 0 ;
+    right : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button__text::after{
+    bottom : 0 ;
+    left : 54px ;
+    width : 8px ;
+}
+.button__line{
+    position : absolute ;
+    top : 0 ;
+    width : 56px ;
+    height : 100% ;
+    overflow : hidden ;
+}
+.button__line::before{
+    content : '' ;
+    position : absolute ;
+    top : 0 ;
+    width : 150% ;
+    height : 100% ;
+    box-sizing : border-box ;
+    border-radius : 300px ;
+    border : solid 3px var(--line_color) ;
+}
+.button__line:nth-child(1),
+.button__line:nth-child(1)::before{
+    left : 0 ;
+}
+.button__line:nth-child(2),
+.button__line:nth-child(2)::before{
+    right : 0 ;
+}
+.button:hover{
+    letter-spacing : 6px ;
+}
+.button:hover::before,
+.button:hover .button__text::before{
+    width : 8px ;
+}
+.button:hover::after,
+.button:hover .button__text::after{
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+
 .transparency {
-  opacity: 0.6;
+  opacity: 0.75;
+}
+
+.transparency2 {
+  opacity: 0.95;
 }
 
 .max-width-LPimage {
-    width: 80%;
+    width: 85%;
     height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-  .faqs_background {
-    background-image: url('./Temp/choppingBoard.jpg');
+.max-width-Logosimage {
+  width: 50%;
+  height: auto;
+}
+
+.card-shine-effect {
+  --shine-deg: 45deg;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  max-width: 28rem;
+  background-color: white;
+  padding: 2rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  background-repeat: no-repeat;
+  background-position: -100% 0, 0 0;
+
+  background-image: linear-gradient(
+    var(--shine-deg),
+    transparent 20%,
+    transparent 40%,
+    rgb(68, 68, 68, 0.2) 50%,
+    rgb(68, 68, 68, 0.2) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+
+  background-size: 250% 250%, 100% 100%;
+  transition: background-position 0s ease;
+}
+
+.card-shine-effect:hover {
+  background-position: 200% 0, 0 0;
+  transition-duration: 1.5s;
+}
+
+.faqs_background {
+    background-image: url('./Temp/blackgranito2.jpg');
     background-size: cover;
-    background-repeat: no-repeat;  /* Impede a repetição da imagem */
-  }
+    background-repeat: no-repeat; 
+}
 
 .no-padding-col {
     padding: 0;
@@ -54,23 +228,28 @@ body {
 
 
 .scrollable {
-    height: 2000px;
+    height: auto;
   }
 
 .max-width-Cimage {
   
   width: 100%;
   height: 250px;
-  border-radius: 4px;
+  border-radius: 2px;
   display: block;
   object-fit: cover;
-  border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
-.carousel-inner .carousel-item {
-    transition: transform 0.5s ease-in-out; 
-}
+  .max-width-CimageF {
+  
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    display: block;
+    object-fit: cover;
+    border: 1px solid #000000;
+    }
 
 .debug-border-conteiner {
     border: 2px solid rgb(255, 0, 0);
@@ -92,10 +271,10 @@ body {
     transition: transform 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    background: #f8f9fa; /* Cor de fundo mais suave */
+    background: #f8f9fa; 
     color: #333;
     margin-top: 80px;
-    background-image: url('./Temp/background2.jpg');*/
+    background-image: url('./Temp/background2.jpg');
 }
 
 .custom-card:hover {
@@ -137,7 +316,7 @@ body {
 }
 
 .card-footer.text-muted {
-    background-color: #f8f9fa; /* Cor de fundo para o rodapé */
+    background-color: #f8f9fa; 
     color: #555;
     border-top: 1px solid #ddd;
     border-radius: 0 0 10px 10px;
@@ -147,7 +326,7 @@ body {
   
 .parallax-container {
   position: relative;
-  height: 500px;
+  height: auto;
   overflow: hidden;
 }
 
@@ -182,10 +361,200 @@ body {
   text-align: center; 
 }
 
+.faq_border {
+  filter: drop-shadow(50px 50px 65px #000000);
+  border: 1px solid #000000;
+  background-color: rgb(255, 255, 255);
+}
+
+.faq-textR {
+  color: #ffffff; 
+  font-size: 16px; 
+  line-height: 1.6; 
+}
+
+.faq-textQ {
+  color: #2aa8f7; 
+  font-size: 20px; 
+  line-height: 2; 
+}
+
+.faq-title {
+  color: #2aa8f7;
+  font-weight: bold; 
+  margin-bottom: 20px; 
+}
+
+.faq-subtitle {
+  color: #ffffff; 
+  font-size: 18px; 
+  margin-bottom: 30px; 
+}
+
 .background-imagen{
   background-image: url('./help.png');
   background-size:  cover;
   background-repeat: no-repeat;
   height: 100vh;
+  opacity: 0.1;
 
+}
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+.modal-imagem{
+  background-image: url('./Temp/H1.jpg');
+  background-size: cover;
+  background-position: center center;
+  height: 500px;
+  border-radius: 5px;
+}
+
+
+.fadedfx {
+  visibility: hidden;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+  animation-duration: 1.0s;
+  -webkit-animation-duration: 1.0s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  visibility: visible !important;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-background{
+  background-image: url('./Temp/background2_1.jpg');
+}
+
+
+
+.footer {
+  background-color: grey;
+}
+
+.special-footer .btnFB:hover {
+  background-color: rgb(156, 231, 252) !important;
+  transition: 1.9s ease;
+}
+
+
+.special-footer .btnInsta:hover {
+  background-color: rgb(229, 147, 229) !important;
+  transition: 1.9s ease;
+}
+
+
+.special-footer .btnTwitter:hover {
+  background-color: rgb(132, 132, 237) !important;
+  transition: 1.9s ease;
+}
+
+.semiwhite-text{
+  color: rgb(253, 229, 186);
+}
+
+.title{
+  color: rgb(37, 2, 2);
+}
+
+
+.small{
+  color: rgb(245, 224, 170);
+}
+
+.special-footer .btnP:hover {
+  -webkit-text-fill-color: rgb(245, 224, 170);
+}
+
+.btn-gradient {
+      background: linear-gradient(to left, #f3e0e0, #7b7c80ac); 
+      color: black; 
+      border: none; 
+      cursor: pointer;
+      -webkit-text-fill-color: white;
+}
+
+
+.special-footer .btn-gradient:hover {
+  -webkit-text-fill-color: #ffff00;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes colorChange {
+  0% { color: rgb(253, 166, 166); } 
+  25% { color: rgb(253, 214, 140); } 
+  50% { color: rgb(241, 241, 204); } 
+  75% { color: rgb(253, 214, 140); } 
+  100% { color: rgb(253, 166, 166); } 
+}
+
+footer {
+background: linear-gradient(to bottom, #8d8d8d, #4b4b4b, #1f1f1f, #000000); 
+color: #333333; 
+padding: 20px; 
+}
+
+.title {
+  font-family: 'Oswald', sans-serif; 
+}
+
+.small {
+  font-family: 'Oswald', sans-serif; 
+}
+
+.chef-title {
+animation: colorChange 10s infinite; 
+}
+
+.semiwhite-text {
+  font-family: 'Oswald', sans-serif; 
+}
+
+.custom-link {
+  color: lightblue;
+}
+
+.custom-link:hover {
+color: aquamarine; 
 }
