@@ -1,3 +1,11 @@
+<?php
+
+require_once(__DIR__."/Middlewares/validarsession.php");
+
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -11,15 +19,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap">
   <link href="./Style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="fade_imagen.js"></script>
  
 </head>
 
 <body>
-
-
+    
   <header>
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid d-flex justify-content-between align-items-center">

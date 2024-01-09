@@ -1,5 +1,13 @@
 <?php
+
+namespace Classes;
+use PDO;
+use PDOException;
+
+
+
 class Database {
+    
     private $servername;
     private $username;
     private $password;

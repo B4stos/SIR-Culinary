@@ -1,4 +1,8 @@
 <?php
+
+namespace Classes;
+
+
 class Utilizador {
 
     private $user_id;
@@ -6,17 +10,15 @@ class Utilizador {
     private $last_name;
     private $notificacao;
     private $email;
-    private $password;
     private $imagem;
     private $telefone;
 
-    public function __construct($user_id, $first_name, $last_name, $notificacao, $email, $password, $imagem, $telefone) {
+    public function __construct($user_id, $first_name, $last_name, $notificacao, $email, $imagem, $telefone) {
         $this->user_id = $user_id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->notificacao = $notificacao;
         $this->email = $email;
-        $this->password = $password;
         $this->imagem = $imagem;
         $this->telefone = $telefone;
     }
@@ -59,14 +61,6 @@ class Utilizador {
 
     public function setEmail($email) {
         $this->email = $email;
-    }
-
-    public function getPassword() {
-        return $this->password;
-    }
-
-    public function setPassword($password) {
-        $this->password = $password;
     }
 
     public function getImagem() {
