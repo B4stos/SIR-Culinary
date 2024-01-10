@@ -23,7 +23,7 @@ class Utilizador {
         $this->telefone = $telefone;
     }
 
-      public function getUserId() {
+    public function getUserId() {
         return $this->user_id;
     }
 
@@ -78,5 +78,6 @@ class Utilizador {
     public function setTelefone($telefone) {
         $this->telefone = $telefone;
     }
+
 }
 ?>

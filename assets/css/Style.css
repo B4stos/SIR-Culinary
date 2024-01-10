@@ -2,7 +2,7 @@
 body {
   padding-top: 62px;
   margin: 0; 
-  background-image: url('./Temp/background2_1.jpg');
+  background-image: url('./../images/Temp/background2_1.jpg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat;
@@ -10,7 +10,7 @@ body {
 }
 
 .carrousel_background {
-  background-image: url('./Temp/book_background.jpg');
+  background-image: url('./../images/Temp/book_background.jpg');
 }
 
 .max-width-logo_image {
@@ -19,7 +19,7 @@ body {
 }
 
 .navbarT{
-  background-image: url('./Temp/leather.jpg');
+  background-image: url('./../images/Temp/leather.jpg');
 }
 
 .icons-font{
@@ -233,7 +233,7 @@ body {
 }
 
 .faqs_background {
-    background-image: url('./Temp/blackgranito2.jpg');
+    background-image: url('./../images/Temp/blackgranito2.jpg');
     background-size: cover;
     background-repeat: no-repeat; 
 }
@@ -290,7 +290,7 @@ body {
     background: #f8f9fa; 
     color: #333;
     margin-top: 80px;
-    background-image: url('./Temp/background2.jpg');
+    background-image: url('./../images/Temp/background2.jpg');
 }
 
 .custom-card:hover {
@@ -347,7 +347,7 @@ body {
 }
 
 .parallax-background {
-  background-image: url('./Temp/paralax4.jpg');
+  background-image: url('./../images/Temp/paralax4.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -425,7 +425,7 @@ background: #eee;
 }
 
 .modal-imagem{
-  background-image: url('./Temp/H1.jpg');
+  background-image: url('./../images/Temp/H1.jpg');
   background-size: cover;
   background-position: center center;
   height: 500px;
@@ -466,7 +466,7 @@ background: #eee;
 }
 
 .modal-background{
-  background-image: url('./Temp/background2_1.jpg');
+  background-image: url('./../images/Temp/background2_1.jpg');
 }
 
 

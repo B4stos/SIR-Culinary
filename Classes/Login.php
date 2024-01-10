@@ -7,6 +7,7 @@ use PDO;
 
 
 class Login {
+
     private $database;
 
     public function __construct($database) {
