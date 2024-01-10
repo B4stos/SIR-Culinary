@@ -17,6 +17,7 @@ class HomePageController{
     {
          $this->database = new Database();
          $this->database->connect();
+        
       
     }
 
@@ -25,7 +26,8 @@ class HomePageController{
 
         $joms="A";
         $receitas = $this->database->getAllRecipes();
-    
+
+        
         include __DIR__."/../Pages/HomePage.php";   
 
     }

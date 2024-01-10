@@ -22,7 +22,7 @@ class Login {
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        // var_dump($result);
+        #var_dump($result);
 
         if ($result) {
             $storedPassword = $result['password'];

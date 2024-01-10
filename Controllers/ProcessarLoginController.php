@@ -24,16 +24,13 @@ class ProcessarLoginController{
 
 public function processologin(){
 
-$this->database->updatePasswordHashes();
-
 $loginHandler = new Login($this->database);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-     var_dump($_POST);
-     die();
+     #var_dump($_POST);
 
     try {
         $user_id = $loginHandler->processLogin($email, $password);
