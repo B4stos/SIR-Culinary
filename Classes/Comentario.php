@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-class Comentarios {
+class Comentario {
     private $comentario_id;
     private $receita_id;
     private $user_id;

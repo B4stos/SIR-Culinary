@@ -83,7 +83,81 @@ class Database {
         $stmt->execute();
         $anexosData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-       
+        $anexos = [];
+    
+        foreach ($anexosData as $anexoData) {
+            $anexos[] = new Anexo(
+                $anexoData['anexo_id'],
+                $anexoData['tipo'],
+                $anexoData['ficheiro'],
+                $anexoData['descricao'],
+                $anexoData['receita_id'],
+                $anexoData['user_id']
+            );
+        }
+    
+        return $anexos;
+    }
+
+    public function getAllComentarios() {
+        $query = "SELECT * FROM Comentario";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $comentariosData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $comentarios = [];
+    
+        foreach ($comentariosData as $comentarioData) {
+            $comentarios[] = new Comentario(
+                $comentarioData['comentario_id'],
+                $comentarioData['receita_id'],
+                $comentarioData['user_id'],
+                $comentarioData['data'],
+                $comentarioData['text'],
+                $comentarioData['validacao']
+            );
+        }
+    
+        return $comentarios;
+    }
+
+    public function getAllIngredientes() {
+        $query = "SELECT * FROM Ingredientes";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $ingredientesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $ingredientes = [];
+    
+        foreach ($ingredientesData as $ingredienteData) {
+            $ingredientes[] = new Ingrediente(
+                $ingredienteData['ingrediente_id'],
+                $ingredienteData['nome'],
+                $ingredienteData['tipo_ingrediente'],
+                $ingredienteData['localizacao'],
+                $ingredienteData['valor']
+            );
+        }
+    
+        return $ingredientes;
+    }
+
+    public function getAllCategorias() {
+        $query = "SELECT * FROM Categorias";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $categoriasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $categorias = [];
+    
+        foreach ($categoriasData as $categoriaData) {
+            $categorias[] = new Categoria(
+                $categoriaData['categoria_id'],
+                $categoriaData['nome']
+            );
+        }
+    
+        return $categorias;
     }
 
     public function getConnection() {

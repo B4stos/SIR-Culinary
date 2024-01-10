@@ -4,7 +4,7 @@ include 'Utilizador.php';
 include 'Database.php';
 
 
-$Database = new Database("localhost","root","","BD_culinaria");
+
 
 
 $Database->connect();
