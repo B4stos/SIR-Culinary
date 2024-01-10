@@ -2,7 +2,7 @@
 body {
   padding-top: 62px;
   margin: 0; 
-  background-image: url('./Temp/background2_1.jpg');
+  background-image: url('./../images/Temp/background2_1.jpg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat;
@@ -10,12 +10,21 @@ body {
 }
 
 .carrousel_background {
-  background-image: url('./Temp/book_background.jpg');
+  background-image: url('./../images/Temp/book_background.jpg');
 }
 
 .max-width-logo_image {
   width: 80%;
   height: auto;
+}
+
+.navbarT{
+  background-image: url('./../images/Temp/leather.jpg');
+}
+
+.icons-font{
+
+  color: white;
 }
 
 .navbar {
@@ -48,8 +57,7 @@ body {
 .navbar-nav .nav-link:focus {
   color: #000000 !important;
 }
-
-        
+    
 .carousel-inner .carousel-item {
   transition: transform 0.5s ease-in-out; 
 }
@@ -89,7 +97,15 @@ body {
     color : var(--line_color) ;
     letter-spacing : 2px ;
     transition : all .3s ease ;
+    border-style: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
 }
+
+.button:hover{
+  background-color: transparent !important;
+}
+
 .button__text{
     display : flex ;
     justify-content : center ;
@@ -217,7 +233,7 @@ body {
 }
 
 .faqs_background {
-    background-image: url('./Temp/blackgranito2.jpg');
+    background-image: url('./../images/Temp/blackgranito2.jpg');
     background-size: cover;
     background-repeat: no-repeat; 
 }
@@ -274,7 +290,7 @@ body {
     background: #f8f9fa; 
     color: #333;
     margin-top: 80px;
-    background-image: url('./Temp/background2.jpg');
+    background-image: url('./../images/Temp/background2.jpg');
 }
 
 .custom-card:hover {
@@ -331,7 +347,7 @@ body {
 }
 
 .parallax-background {
-  background-image: url('./Temp/paralax4.jpg');
+  background-image: url('./../images/Temp/paralax4.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -409,7 +425,7 @@ background: #eee;
 }
 
 .modal-imagem{
-  background-image: url('./Temp/H1.jpg');
+  background-image: url('./../images/Temp/H1.jpg');
   background-size: cover;
   background-position: center center;
   height: 500px;
@@ -450,7 +466,7 @@ background: #eee;
 }
 
 .modal-background{
-  background-image: url('./Temp/background2_1.jpg');
+  background-image: url('./../images/Temp/background2_1.jpg');
 }
 
 
@@ -508,19 +524,6 @@ background: #eee;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @keyframes colorChange {
   0% { color: rgb(253, 166, 166); } 
   25% { color: rgb(253, 214, 140); } 
@@ -557,4 +560,23 @@ animation: colorChange 10s infinite;
 
 .custom-link:hover {
 color: aquamarine; 
+}
+
+/* Homepage */
+
+.custom-buttonH {
+  display: inline-block;
+  padding: 10px 20px;
+  border-style: solid;
+  border-radius: 20%;
+  border-color: rgb(80, 80, 80);
+  cursor: pointer;
+  color: black;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-buttonH:hover {
+  background-color: #000000;
+  transform: scale(0.9); 
+  color: white;
 }
