@@ -94,6 +94,20 @@
             echo $receita->getTitulo(); 
             echo $receita->getModoPreparo();
         }
+
+        $status = session_status();
+
+        if ($status == PHP_SESSION_ACTIVE) {
+             echo "A sessão está ativa.";
+        } elseif ($status == PHP_SESSION_NONE) {
+            echo "A sessão está habilitada, mas não existe.";
+        } elseif ($status == PHP_SESSION_DISABLED) {
+            echo "As sessões estão desabilitadas.";
+        }
+
+        #session_destroy();
+
+ 
  ?>
 </main>
 

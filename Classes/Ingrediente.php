@@ -37,7 +37,6 @@ class Ingrediente {
         return $this->valor;
     }
 
-    // Setters
     public function setIngredienteId($ingrediente_id) {
         $this->ingrediente_id = $ingrediente_id;
     }

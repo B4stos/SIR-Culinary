@@ -160,6 +160,27 @@ class Database {
         return $categorias;
     }
 
+    // a finalizar
+    public function getAllRecipesByCategoria(){
+        $query = "SELECT * FROM Receitas" ;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $categoriasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $categorias = [];
+    
+        foreach ($categoriasData as $categoriaData) {
+            $categorias[] = new Categoria(
+                $categoriaData['categoria_id'],
+                $categoriaData['nome']
+            );
+        }
+    
+        return $categorias;
+
+
+    }
+
     public function getConnection() {
         return $this->conn;
     }
