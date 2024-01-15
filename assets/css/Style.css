@@ -580,3 +580,77 @@ color: aquamarine;
   transform: scale(0.9); 
   color: white;
 }
+
+
+.masonry-item {
+  margin-bottom: 36px;
+}
+
+.receita-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ddd; /* Borda simples */
+  background-color: #fff; /* Fundo branco */
+  border-radius: 8px; /* Borda arredondada */
+  transition: transform 0.3s ease-in-out; /* Transição suave para o efeito hover */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Sombra sutil */
+}
+
+.receita-card:hover {
+  transform: scale(1.05); /* Aumenta a escala em 5% no hover */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
+}
+
+.receita-card-img-top {
+    width: 100%;
+    height: 360px; 
+    object-fit: cover; 
+}
+
+.receita-card-body {
+  padding: 16px;
+}
+
+.receita-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.receita-card-text {
+  font-size: 1rem;
+}
+
+.categorias-bar {
+  overflow-x: auto;
+  display: flex;
+  gap: 10px; 
+  padding: 15px;
+  background-image: url("./../images/Temp/woodbackground.jpg");
+  border: #000000;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px;
+  margin-top: 22px;
+}
+
+.categorias-bar .btn {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border-color: #000000;
+  border-radius: 16px; 
+  padding: 4px 12px;
+}
+
+.testJs{
+  cursor: pointer;
+}
+
+
+.max-width-user_image {
+  max-width: 70%;
+  max-height: 40px; /* ou a altura desejada para a imagem do usuário */
+  object-fit: contain; /* Para manter a proporção da imagem sem distorção */
+}
+

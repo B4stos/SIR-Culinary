@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap">
   <link href="./assets/css/Style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  
 </head>
 
@@ -26,8 +25,8 @@
             </button>
 
 
-            <a class="navbar-brand" href="#header">
-                <img src="./assets/images/Logo/L2.jpg" alt="Logotipo" class="ms-2">
+            <a class="navbar-brand testJs" data-id='' href="#header">
+                <img src="./assets/images/Logo/L2.jpg"  alt="Logotipo" class="ms-2">
             </a>
 
 
@@ -88,26 +87,40 @@
 
 <main>  
 
+
+    <section class="container">
+        <div class="categorias-bar">
+            <?php foreach ($listacategorias as $categoria) : ?>
+            <button class="btn card-shine-effect testJs" data-id="<?php echo $categoria->getNome(); ?>"><?php echo $categoria->getNome();?></button>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+  
+
+    <section class="container">
+        <div class="row" data-id="" id="masonry-container">
+        </div>
+    </section>
+
+
+
+
+
+
 <?php
-        echo $joms;
-        foreach ($receitas as $receita) {
-            echo $receita->getTitulo(); 
-            echo $receita->getModoPreparo();
-        }
 
-        $status = session_status();
+        #$status = session_status();
 
-        if ($status == PHP_SESSION_ACTIVE) {
-             echo "A sessão está ativa.";
-        } elseif ($status == PHP_SESSION_NONE) {
-            echo "A sessão está habilitada, mas não existe.";
-        } elseif ($status == PHP_SESSION_DISABLED) {
-            echo "As sessões estão desabilitadas.";
-        }
+        #if ($status == PHP_SESSION_ACTIVE) {
+        #     echo "A sessão está ativa.";
+        #} elseif ($status == PHP_SESSION_NONE) {
+        #    echo "A sessão está habilitada, mas não existe.";
+        #} elseif ($status == PHP_SESSION_DISABLED) {
+        #    echo "As sessões estão desabilitadas.";
+        #}
 
         #session_destroy();
-
- 
  ?>
 </main>
 
@@ -116,6 +129,11 @@
 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
 crossorigin="anonymous">
 </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="./assets/js/masonry_script.js"></script>
+<script src="./assets/js/atualizarReceitas.js"></script>
+<script src="./assets/js/pesquisarReceitasCategorias.js"></script>
   
 </body>
 
