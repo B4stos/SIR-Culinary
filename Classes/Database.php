@@ -2,8 +2,11 @@
 
 namespace Classes;
 
-
+require_once (__DIR__."/ReceitaCard.php");
+require_once (__DIR__."/Categoria.php");
 require_once (__DIR__."/../Config/ConfigDB.php");
+use Classes\ReceitaCard;
+use Classes\Categoria;
 use Config\ConfigDB;
 use PDO;
 use PDOException;
@@ -31,9 +34,9 @@ class Database {
         try {
             $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Conexão com o banco de dados estabelecida com sucesso";
+            #echo "Conexão com o banco de dados estabelecida com sucesso";
         } catch(PDOException $e) {
-            echo "Conexão falhou: " . $e->getMessage();
+            #echo "Conexão falhou: " . $e->getMessage();
         }
     }
 
@@ -160,25 +163,71 @@ class Database {
         return $categorias;
     }
 
-    // a finalizar
-    public function getAllRecipesByCategoria(){
-        $query = "SELECT * FROM Receitas" ;
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $categoriasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        $categorias = [];
-    
-        foreach ($categoriasData as $categoriaData) {
-            $categorias[] = new Categoria(
-                $categoriaData['categoria_id'],
-                $categoriaData['nome']
-            );
+    public function getReceitasCards() {
+        try {
+            $stmt = $this->conn->query("SELECT * FROM receitacard");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $receitas = array();
+
+            foreach ($result as $row) {
+                $receita = new ReceitaCard(
+                    $row['id_receita'],
+                    $row['titulo_receita'],
+                    $row['data_preparo'],
+                    $row['imagem_anexo'],
+                    $row['nome_categoria'],
+                    $row['user_id'],
+                    $row['first_name'],
+                    $row['imagem_usuario']
+                );
+
+                $receita->setDefaultImagemAnexo();
+                $receita->setDefaultImagemUsuario();
+                $receita->setData($receita->formatarData($row['data_preparo']));
+                $receitas[] = $receita;
+
+            }
+            return $receitas;
+            
+        } catch(PDOException $e) {
+            echo "Erro buscar a vista " . $e->getMessage();
         }
+
+    }
+
+    public function getReceitaCardCategoria($nomeCategoria) {
+        try {
+            $query = "SELECT * FROM receitacard WHERE nome_categoria = :nomeCategoria";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':nomeCategoria', $nomeCategoria, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        return $categorias;
-
-
+            $receitas = array();
+    
+            foreach ($result as $row) {
+                $receita = new ReceitaCard(
+                    $row['id_receita'],
+                    $row['titulo_receita'],
+                    $row['data_preparo'],
+                    $row['imagem_anexo'],
+                    $row['nome_categoria'],
+                    $row['user_id'],
+                    $row['first_name'],
+                    $row['imagem_usuario']
+                );
+    
+                $receita->setDefaultImagemAnexo();
+                $receita->setDefaultImagemUsuario();
+                $receita->setData($receita->formatarData($row['data_preparo']));
+                $receitas[] = $receita;
+            }
+    
+            return $receitas;
+        } catch(PDOException $e) {
+            echo "Erro ao buscar receitas por categoria: " . $e->getMessage();
+        }
     }
 
     public function getConnection() {
