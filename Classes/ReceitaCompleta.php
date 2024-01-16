@@ -3,6 +3,11 @@
 
 namespace Classes;
 
+use Classes\Ingrediente;
+use Classes\Anexo;
+use Classes\Comentario;
+use Classes\Categoria;
+
 
 class ReceitaCompleta {
     public $receita_id;
@@ -16,9 +21,10 @@ class ReceitaCompleta {
     public $datadescricao;
     public $comentarios;
     public $categorias;
+    public $user;
 
 
-    public function __construct($receita_id,$titulo,$modo_preparo,$data_preparo,$favorito,$ingredientes,$anexos,$descricao,$datadescricao,$comentarios, $categorias ) {
+    public function __construct($receita_id,$titulo,$modo_preparo,$data_preparo,$favorito,$ingredientes,$anexos,$descricao,$datadescricao,$comentarios, $categorias, $user ) {
 
         $this->receita_id = $receita_id;
         $this->titulo = $titulo;
@@ -31,6 +37,7 @@ class ReceitaCompleta {
         $this->datadescricao = $datadescricao;
         $this->comentarios = $comentarios;
         $this->categorias = $categorias;
+        $this->user = $user;
     }
 
     public function getReceitaId() {

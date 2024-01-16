@@ -6,15 +6,13 @@ class Anexo {
     private $anexo_id;
     private $tipo;
     private $ficheiro;
-    private $descricao;
     private $receita_id;
     private $user_id;
 
-    public function __construct($anexo_id, $tipo, $ficheiro, $descricao, $receita_id, $user_id) {
+    public function __construct($anexo_id, $tipo, $ficheiro, $receita_id, $user_id) {
         $this->anexo_id = $anexo_id;
         $this->tipo = $tipo;
         $this->ficheiro = $ficheiro;
-        $this->descricao = $descricao;
         $this->receita_id = $receita_id;
         $this->user_id = $user_id;
     }
@@ -30,10 +28,6 @@ class Anexo {
 
     public function getFicheiro() {
         return $this->ficheiro;
-    }
-
-    public function getDescricao() {
-        return $this->descricao;
     }
 
     public function getReceitaId() {
@@ -54,10 +48,6 @@ class Anexo {
 
     public function setFicheiro($ficheiro) {
         $this->ficheiro = $ficheiro;
-    }
-
-    public function setDescricao($descricao) {
-        $this->descricao = $descricao;
     }
 
     public function setReceitaId($receita_id) {

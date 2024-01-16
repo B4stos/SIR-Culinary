@@ -654,3 +654,9 @@ color: aquamarine;
   object-fit: contain; /* Para manter a proporção da imagem sem distorção */
 }
 
+.max-width-user_image_nav {
+  max-width: 70%;
+  max-height: 40px; /* ou a altura desejada para a imagem do usuário */
+  object-fit: contain; /* Para manter a proporção da imagem sem distorção */
+}
+
