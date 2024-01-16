@@ -4,9 +4,11 @@ namespace Classes;
 
 require_once (__DIR__."/ReceitaCard.php");
 require_once (__DIR__."/Categoria.php");
+require_once (__DIR__."/ReceitaCompleta.php");
 require_once (__DIR__."/../Config/ConfigDB.php");
 use Classes\ReceitaCard;
 use Classes\Categoria;
+use Classes\ReceitaCompleta;
 use Config\ConfigDB;
 use PDO;
 use PDOException;
@@ -227,6 +229,81 @@ class Database {
             return $receitas;
         } catch(PDOException $e) {
             echo "Erro ao buscar receitas por categoria: " . $e->getMessage();
+        }
+    }
+
+    public function getReceitaCardtitulo($titulo) {
+        try {
+            $query = "SELECT * FROM receitacard WHERE titulo_receita = :titulo";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            $receitas = array();
+    
+            foreach ($result as $row) {
+                $receita = new ReceitaCard(
+                    $row['id_receita'],
+                    $row['titulo_receita'],
+                    $row['data_preparo'],
+                    $row['imagem_anexo'],
+                    $row['nome_categoria'],
+                    $row['user_id'],
+                    $row['first_name'],
+                    $row['imagem_usuario']
+                );
+    
+                $receita->setDefaultImagemAnexo();
+                $receita->setDefaultImagemUsuario();
+                $receita->setData($receita->formatarData($row['data_preparo']));
+                $receitas[] = $receita;
+            }
+    
+            return $receitas;
+        } catch(PDOException $e) {
+            echo "Erro ao buscar receitas por categoria: " . $e->getMessage();
+        }
+    }
+
+
+    public function inserirReceitaCompleta(ReceitaCompleta $receitaCompleta) {
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO Receitas (titulo, modo_preparo, data_preparo, user_id) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$receitaCompleta->titulo, $receitaCompleta->modo_preparo, $receitaCompleta->data_preparo, $receitaCompleta->user->user_id]);
+            $receita_id = $this->conn->lastInsertId();
+
+            
+            if ($receitaCompleta->anexos) {
+                foreach ($receitaCompleta->anexos as $anexo) {
+                    $stmt = $this->conn->prepare("INSERT INTO Anexos (tipo, ficheiro, receita_id) VALUES (?, ?, ?)");
+                    $stmt->execute([$anexo->tipo, $anexo->ficheiro, $receita_id]);
+                }
+            }
+
+            if ($receitaCompleta->categorias) {
+                foreach ($receitaCompleta->categorias as $categoria) {
+                    // Substitua este trecho de código com a lógica apropriada
+                    $stmt = $this->conn->prepare("INSERT INTO Receitas_Categorias (receita_id, categoria_id) VALUES (?, ?)");
+                    $stmt->execute([$receita_id, $categoria->categoria_id]);
+                }
+            }
+
+            // Commit da transação
+            $this->conn->commit();
+
+            // Fechar a conexão
+            $this->conn = null;
+
+            return true; 
+
+        } catch (PDOException $e) {
+            // Rollback da transação em caso de erro
+
+            // Handle the error appropriately (log, display, etc.)
+            echo "Erro: " . $e->getMessage();
+
+            return false; // Inserção falhou
         }
     }
 

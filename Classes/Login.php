@@ -51,7 +51,9 @@ class Login {
             $userData['imagem'],
             $userData['telefone']
         );
-    
+
+        $utilizador->setDefaultImagemUsuario();
+        
         $_SESSION['utilizador'] = $utilizador;
     }
     

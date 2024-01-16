@@ -2,14 +2,17 @@ function atualizarReceitas() {
     console.log('Atualizando receitas...');
     let data={}
     let nomeCategoria=$("#masonry-container").attr("data-id");
+    let termoPesquisa = $("#masonry-container").attr("data-pesquisa");
     console.log($("#masonry-container"));
     let url='';
-    if(nomeCategoria.length>0){
-         url = '/projeto/Repositorio_SIR/SIR-Culinary/Controllers/ReceitasCategorias.php';
-        data={ id_categoria: nomeCategoria }
-    }
-    else{
-         url = '/projeto/Repositorio_SIR/SIR-Culinary/Controllers/AtualizarReceitas.php';
+    if (termoPesquisa && termoPesquisa.length > 0) {
+        url = '/projeto/Repositorio_SIR/SIR-Culinary/Controllers/ReceitasTitulo.php';
+        data = { termo_pesquisa: termoPesquisa };  
+    } else if (nomeCategoria.length > 0) {
+        url = '/projeto/Repositorio_SIR/SIR-Culinary/Controllers/ReceitasCategorias.php';
+        data = { id_categoria: nomeCategoria };
+    } else {
+        url = '/projeto/Repositorio_SIR/SIR-Culinary/Controllers/AtualizarReceitas.php';
     }
     console.log(url)
     $.ajax({

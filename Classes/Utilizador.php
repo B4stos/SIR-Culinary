@@ -23,6 +23,12 @@ class Utilizador {
         $this->telefone = $telefone;
     }
 
+    public function setDefaultImagemUsuario(){
+        if ($this->imagem == null) {
+            $this->imagem = '.\assets\images\Imagensr\userimagen\imagenBase.jpg';
+        }
+    }
+
     public function getUserId() {
         return $this->user_id;
     }

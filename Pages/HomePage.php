@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap">
   <link href="./assets/css/Style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
  
 </head>
 
@@ -20,42 +21,30 @@
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid d-flex justify-content-between align-items-center">
 
-            <button class="btn btn-secondary d-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticCanvasLeft" aria-controls="staticCanvasLeft">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
 
             <a class="navbar-brand testJs" data-id='' href="#header">
                 <img src="./assets/images/Logo/L2.jpg"  alt="Logotipo" class="ms-2">
             </a>
 
 
-            <form class="d-flex flex-grow-1 justify-content-center">
-                <input class="form-control me-2 flex-grow-1" type="search" placeholder="Pesquisa" aria-label="Search" style="max-width: 500px;">
-                <div style="text-align: center;" type="button" class="custom-buttonH">
-                    <i class="fa-solid fa-magnifying-glass fa-1x"></i>
-                </div>
+            <form id="searchForm" class="d-flex flex-grow-1 justify-content-center">
+                <input id="searchInput" class="form-control me-2 flex-grow-1" type="search" placeholder="Pesquisa" aria-label="Search" style="max-width: 500px;">
+                <button id="customButton" type="submit" class="custom-buttonH">
+                <i class="fa-solid fa-magnifying-glass fa-1x"></i>
+                </button>
             </form>
 
             <form class="d-flex justify-content-end d-none d-md-block">
                 <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH">
+                    <i class="fa-solid fa-book-open  fa-1x"></i>
+                </div>
+                <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH" data-bs-toggle="modal" data-bs-target="#CriarReceita">
                     <i class="fa-solid fa-file-circle-plus fa-1x"></i>
                 </div>
-                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="">       
+                <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php echo $utilizador->getImagem();?>" alt="">       
             </form>
         </div>
     </nav>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-scroll="true" id="staticCanvasLeft" aria-labelledby="staticCanvasLeftLabel" data-bs-backdrop="false" style="margin-top: 78px; width: 200px;">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="staticCanvasLabelLeft">Canvas Estático left</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-    <div class="offcanvas-body">
-        <p>Aqui está o conteúdo do canvas estático...</p>
-        </div>
-    </div> 
-
     
          
     <div class="container-fluid">
@@ -74,7 +63,7 @@
                         <i class="fa-solid fa-book-open  fa-2x"></i>
                         <span class="button__text">receitas</span>
                     </div>
-                        <img class="rounded-circle me-4" src="https://dummyimage.com/50x50/ced4da/6c757d" alt="">
+                        <img class="rounded-circle me-4" src="<?php echo $utilizador->getImagem();?>" alt="">
                 </footer>
             </div>    
         </div>
@@ -122,6 +111,60 @@
 
         #session_destroy();
  ?>
+
+
+<div class="modal fade" id="CriarReceita" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Adicionar Receita</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAdicionarReceitaData" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                    <div id="ingredientesContainer" class="mb-3">
+                        <label for="ingredientes" class="form-label">Ingredientes</label>
+                        <div class="ingredientes">
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="idnomeIngrediente" name="nomeIngredientes[]" placeholder="Nome do Ingrediente" required>
+                        <input type="text" class="form-control" name="quantidade[]" placeholder="Quantidade" required>
+                        <input type="text" class="form-control" name="valor[]" placeholder="Valor" required>
+                        <input type="text" class="form-control" name="Origem[]" placeholder="Origem" required>
+                        <button class="btn btn-outline-secondary" type="button" name="adicionarIngrediente">Adicionar</button>
+                    </div>
+                </div>
+                <ul id="listaIngredientes" class="list-group mt-3"></ul>
+                </div>
+                    <div class="mb-3">
+                        <label for="modoPreparo" class="form-label">Modo de Preparo</label>
+                        <textarea class="form-control" id="modoPreparo" name="modoPreparo" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notas" class="form-label">Notas</label>
+                        <textarea class="form-control" id="notas" name="notas" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="anexo" class="form-label">Anexos</label>
+                        <input type="file" class="form-control" id="anexo" name="anexo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categorias" class="form-label">Categorias</label>
+                        <textarea class="form-control" id="categorias" name="categorias" rows="3" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnAdicionarReceita">Adicionar Receita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </main>
 
 
@@ -133,8 +176,10 @@ crossorigin="anonymous">
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="./assets/js/masonry_script.js"></script>
 <script src="./assets/js/atualizarReceitas.js"></script>
-<script src="./assets/js/pesquisarReceitasCategorias.js"></script>
-  
+<script src="./assets/js/pesquisarReceitas.js"></script>
+<script src="./jsc/main/IngredientesReceitas.js"></script>
+<script src="./jsc/main/CriarReceitas.js"></script>
+
 </body>
 
 </html>
