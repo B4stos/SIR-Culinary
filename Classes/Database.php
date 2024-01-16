@@ -4,12 +4,20 @@ namespace Classes;
 
 require_once (__DIR__."/ReceitaCard.php");
 require_once (__DIR__."/Categoria.php");
+require_once (__DIR__."/Ingrediente.php");
+require_once (__DIR__."/Comentario.php");
+require_once (__DIR__."/Descricao.php");
 require_once (__DIR__."/ReceitaCompleta.php");
 require_once (__DIR__."/Anexo.php");
+require_once (__DIR__."/Receita.php");
 require_once (__DIR__."/Utilizador.php");
 require_once (__DIR__."/../Config/ConfigDB.php");
 
 use Classes\Utilizador;
+use Classes\Ingrediente;
+use Classes\Comentario;
+use Classes\Descricao;
+use Classes\Receita;
 use Classes\ReceitaCard;
 use Classes\Categoria;
 use Classes\ReceitaCompleta;
@@ -47,6 +55,113 @@ class Database {
         }
     }
 
+    public function getAllUsers() {
+        $query = "SELECT * FROM users";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $utilizadoresData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $utilizadores = [];
+        
+        foreach ($utilizadoresData as $utilizadorData) {
+            $utilizadores[] = new Utilizador(
+                $utilizadorData['user_id'],
+                $utilizadorData['first_name'],
+                $utilizadorData['last_name'],
+                $utilizadorData['notificacao'],
+                $utilizadorData['email'],
+                $utilizadorData['imagem'],
+                $utilizadorData['telefone']
+            );
+        }
+
+        return $utilizadores;
+    }
+
+    public function updateUserInfo($user_id, $first_name, $last_name, $email, $telefone) {
+        $query = "UPDATE users SET first_name = ?, last_name = ?, email = ?, telefone = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$first_name, $last_name, $email, $telefone, $user_id]);
+        // Add error handling if needed
+    }
+
+
+    /*public function updateUserImage($user_id, $imagePath) {
+        $query = "UPDATE users SET imagem = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$imagePath, $user_id]);
+        // Add error handling if needed
+    }*/
+
+
+    public function updateUserImage($user_id, $imagePath) {
+        $query = "UPDATE users SET imagem = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        
+        // Construct the relative path from the absolute path
+        $relativeImagePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $imagePath);
+        
+        $stmt->execute([$relativeImagePath, $user_id]);
+        // Add error handling if needed
+    }
+
+
+    public function getImagem($user_id) {
+        $query = "SELECT imagem FROM users WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$userData || empty($userData['imagem'])) {
+            // Provide a default image URL or handle the case where the file doesn't exist
+            return 'imgsupload/default-image.png';
+        }
+    
+        return $userData['imagem'];
+    }
+    
+    
+
+
+    public function getUserById($user_id) {
+        $query = "SELECT * FROM users WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$userData) {
+            return null; // User not found
+        }
+    
+        return new Utilizador(
+            $userData['user_id'],
+            $userData['first_name'],
+            $userData['last_name'],
+            $userData['notificacao'],
+            $userData['email'],
+            $userData['imagem'],
+            $userData['telefone']
+        );
+    }
+
+
+    public function isEmailTaken($email) {
+        $query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$email]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+
+    public function isTelefoneTaken($telefone) {
+        $query = "SELECT COUNT(*) FROM users WHERE telefone = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$telefone]);
+        return $stmt->fetchColumn() > 0;
+    }
+
     public function updatePasswordHashes() {
         $query = "SELECT user_id, password FROM Users";
         $stmt = $this->conn->prepare($query);
@@ -66,30 +181,33 @@ class Database {
         echo "Hashes de senha atualizados com sucesso!";
     }
 
-    public function getAllRecipes() {
-        $query = "SELECT * FROM Receitas";
+    public function getReceitaPorId($receitaId) {
+        $query = "SELECT * FROM Receitas WHERE receita_id = :receitaId";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
         $stmt->execute();
-        $receitasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $receitas = [];
-
-        foreach ($receitasData as $receitaData) {
-            $receitas[] = new Receita(
+    
+        $receitaData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($receitaData) {
+            $receita = new Receita(
                 $receitaData['receita_id'],
                 $receitaData['titulo'],
                 $receitaData['modo_preparo'],
                 $receitaData['data_preparo'],
                 $receitaData['user_id']
             );
+    
+            return $receita;
         }
-
-        return $receitas;
+    
+        return null; // Retorna null se não encontrar a receita
     }
 
-    public function getAllAnexos() {
-        $query = "SELECT * FROM Anexos";
+    public function getAnexosPorReceitaId($receitaId) {
+        $query = "SELECT * FROM Anexos WHERE receita_id = :receitaId";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
         $stmt->execute();
         $anexosData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -109,9 +227,10 @@ class Database {
         return $anexos;
     }
 
-    public function getAllComentarios() {
-        $query = "SELECT * FROM Comentario";
+    public function getComentariosPorReceitaId($receitaId) {
+        $query = "SELECT * FROM Comentarios WHERE receita_id = :receitaId";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
         $stmt->execute();
         $comentariosData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -131,9 +250,10 @@ class Database {
         return $comentarios;
     }
 
-    public function getAllIngredientes() {
-        $query = "SELECT * FROM Ingredientes";
+    public function getIngredientesPorReceitaId($receitaId) {
+        $query = "SELECT * FROM Ingredientes WHERE receita_id = :receitaId";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
         $stmt->execute();
         $ingredientesData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -143,7 +263,7 @@ class Database {
             $ingredientes[] = new Ingrediente(
                 $ingredienteData['ingrediente_id'],
                 $ingredienteData['nome'],
-                $ingredienteData['tipo_ingrediente'],
+                $ingredienteData['quantidade_na_receita'],
                 $ingredienteData['localizacao'],
                 $ingredienteData['valor']
             );
@@ -152,9 +272,12 @@ class Database {
         return $ingredientes;
     }
 
-    public function getAllCategorias() {
-        $query = "SELECT * FROM Categorias";
+    public function getCategoriasPorReceitaId($receitaId) {
+        $query = "SELECT C.* FROM Categorias C
+                  JOIN Receitas_Categorias RC ON C.categoria_id = RC.categoria_id
+                  WHERE RC.receita_id = :receitaId";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
         $stmt->execute();
         $categoriasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -169,6 +292,7 @@ class Database {
     
         return $categorias;
     }
+    
 
     public function getReceitasCards() {
         try {
@@ -201,6 +325,27 @@ class Database {
             echo "Erro buscar a vista " . $e->getMessage();
         }
 
+    }
+
+    public function getDescricaoPorId($receitaId) {
+        $query = "SELECT * FROM Descricoes WHERE receita_id = :receitaId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':receitaId', $receitaId, PDO::PARAM_INT);
+        $stmt->execute();
+        $descricaoData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($descricaoData) {
+            $descricao = new Descricao(
+                $descricaoData['descricao_id'],
+                $descricaoData['descricao'],
+                $descricaoData['data'],
+                $descricaoData['receita_id']
+            );
+    
+            return $descricao;
+        }
+    
+        return null;
     }
 
     public function getReceitaCardCategoria($nomeCategoria) {
@@ -364,7 +509,63 @@ class Database {
             echo "Erro ao adicionar receita ao banco de dados: " . $e->getMessage();
         }
     }
+
+    public function getAllCategorias() {
+        $query = "SELECT * FROM Categorias";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $categoriasData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+        $categorias = [];
+    
+        foreach ($categoriasData as $categoriaData) {
+            $categorias[] = new Categoria(
+                $categoriaData['categoria_id'],
+                $categoriaData['nome']
+            );
+        }
+    
+        return $categorias;
+    }
+
+    public function getReceitaCompletaPorId($receitaId) {
+        
+        $utilizador = isset($_SESSION['utilizador']) ? $_SESSION['utilizador'] : null;
+        $userId = $utilizador->getUserId();
+
+        $receita = $this->getReceitaPorId($receitaId);
+    
+        if (!$receita) {
+            return null; // Retorna null se a receita não for encontrada
+        }
+   
+        $ingredientes = $this->getIngredientesPorReceitaId($receitaId);
+    
+        $anexos = $this->getAnexosPorReceitaId($receitaId);
+    
+        $comentarios = $this->getComentariosPorReceitaId($receitaId);
+
+        $descricao = $this->getDescricaoPorId($receitaId);
+
+        $categorias = $this->getCategoriasPorReceitaId($receitaId);
+    
+        $receitaCompleta = new ReceitaCompleta(
+            $receita->getReceitaId(),
+            $receita->getTitulo(),
+            $receita->getModoPreparo(),
+            $receita->getDataPreparo(),
+            null,
+            $ingredientes,
+            $anexos,
+            $descricao->getDescricao(),
+            $descricao->getData(),
+            $comentarios,
+            $categorias,
+            $userId 
+        );
+    
+        return $receitaCompleta;
+    }
 
     public function getConnection() {
         return $this->conn;

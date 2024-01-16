@@ -37,16 +37,17 @@
 
             <form class="d-flex justify-content-end d-none d-md-block">
                 <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH">
+                        <i class="fa-solid fa-heart fa-1x"></i>
+                    </div>
+                <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH">
                     <i class="fa-solid fa-book-open  fa-1x"></i>
                 </div>
                 <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH" data-bs-toggle="modal" data-bs-target="#CriarReceita">
                     <i class="fa-solid fa-file-circle-plus fa-1x"></i>
                 </div>
-                <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php
-
-use Classes\Utilizador;
-
- echo $utilizador->getImagem();?>" alt="">       
+                <a href="perfilpage.php">
+                    <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php echo $utilizador->getImagem();?>" alt="">
+                </a>       
             </form>
         </div>
     </nav>
@@ -57,10 +58,10 @@ use Classes\Utilizador;
             <div class="col-md-6 d-block d-md-none ">
                 <footer class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
                     <div style="text-align: center" type="button" class="custom-buttonH">
-                        <i class="fa-solid fa-house  fa-2x"></i>
-                        <span class="button__text">Home</span>
+                        <i class="fa-solid fa-heart fa-2x"></i>
+                        <span class="button__text">Fav</span>
                     </div>
-                    <div style="text-align: center;" type="button" class="custom-buttonH">
+                    <div style="text-align: center;" type="button" class="custom-buttonH" data-bs-toggle="modal" data-bs-target="#CriarReceita">
                         <i class="fa-solid fa-file-circle-plus  fa-2x"></i>
                         <span class="button__text">Criar receita</span>
                     </div>
@@ -68,7 +69,7 @@ use Classes\Utilizador;
                         <i class="fa-solid fa-book-open  fa-2x"></i>
                         <span class="button__text">receitas</span>
                     </div>
-                        <img class="rounded-circle me-4" src="<?php echo $utilizador->getImagem();?>" alt="">
+                        <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php echo $utilizador->getImagem();?>" alt="">
                 </footer>
             </div>    
         </div>
@@ -97,13 +98,48 @@ use Classes\Utilizador;
         </div>
     </section>
 
+    <script>
+    $(document).ready(function() {
+        // Adiciona um ouvinte de eventos para clicar nas cards
+        $('.testJs').click(function() {
+            // Recupera o valor do atributo data-user-id da card clicada
+            var userId = $(this).data('user-id');
 
+            // Abre o modal de teste
+            abrirModal();
+        });
 
+        // Função para abrir o modal de teste
+        function abrirModal() {
+            // Lógica para abrir o modal de teste
+            $('#exemploModal').modal('show');
+        }
+    });
+</script>
 
+<div class="modal fade" id="exemploModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal de Teste</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo do modal aqui -->
+                <p>Conteúdo do modal de teste.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php
-  
+
+    #var_dump($Receitacompleta);
+    
         #$status = session_status();
 
         #if ($status == PHP_SESSION_ACTIVE) {
@@ -122,17 +158,17 @@ use Classes\Utilizador;
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Adicionar Receita</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Criar Receita</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="formAdicionarReceitaData" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="titulo" class="form-label">Título</label>
+                        <label for="titulo" class="form-label">*Título:</label>
                         <input type="text" class="form-control" id="titulo" name="titulo" required>
                     </div>
                     <div id="ingredientesContainer" class="mb-3">
-                        <label class="form-label">Ingredientes</label>
+                        <label class="form-label">Ingredientes:</label>
                         <div class="ingredientes">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="idnomeIngrediente" name="nomeIngredientes[]" placeholder="Nome do Ingrediente" required>
@@ -145,24 +181,30 @@ use Classes\Utilizador;
                         <ul id="listaIngredientes" class="list-group mt-3"></ul>
                     </div>
                     <div class="mb-3">
-                        <label for="modoPreparo" class="form-label">Modo de Preparo</label>
+                        <label for="modoPreparo" class="form-label">*Modo de Preparo:</label>
                         <textarea class="form-control" id="modoPreparo" name="modoPreparo" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="notas" class="form-label">Notas</label>
+                        <label for="notas" class="form-label">Notas/Extras:</label>
                         <textarea class="form-control" id="notas" name="notas" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="anexo" class="form-label">Anexos</label>
+                        <label for="anexo" class="form-label">Anexo:</label>
                         <input type="file" class="form-control" id="anexo" name="anexo">
                     </div>
                     <div class="mb-3">
-                        <label for="categorias" class="form-label">Categorias</label>
-                        <textarea class="form-control" id="categorias" name="categorias" rows="3" required></textarea>
+                        <label for="categorias" class="form-label">*Categoria:</label>
+                        <textarea class="form-control" id="categorias" name="categorias" rows="1" required></textarea>
                     </div>
+                    <a style="display: inline-block;" class="small text-muted">* Dados Obrigatórios</a>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="btnAdicionarReceita">Adicionar Receita</button>
+                    <button class="button typeanimation" type="button" id="btnAdicionarReceita">
+                              <div class="button__line"></div>
+                              <div class="button__line"></div>
+                              <span class="button__text">Criar Receita</span>
+                              <div class="button__drow1"></div>
+                              <div class="button__drow2"></div> 
+                    </button>
                     </div>
                 </form>
             </div>
