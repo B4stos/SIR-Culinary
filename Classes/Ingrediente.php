@@ -5,14 +5,14 @@ namespace Classes;
 class Ingrediente {
     private $ingrediente_id;
     private $nome;
-    private $tipo_ingrediente;
+    private $quantidade;
     private $localizacao;
     private $valor;
 
-    public function __construct($ingrediente_id, $nome, $tipo_ingrediente, $localizacao, $valor) {
+    public function __construct($ingrediente_id, $nome, $quantidade, $localizacao, $valor) {
         $this->ingrediente_id = $ingrediente_id;
         $this->nome = $nome;
-        $this->tipo_ingrediente = $tipo_ingrediente;
+        $this->quantidade = $quantidade;
         $this->localizacao = $localizacao;
         $this->valor = $valor;
     }
@@ -25,11 +25,11 @@ class Ingrediente {
         return $this->nome;
     }
 
-    public function getTipoIngrediente() {
-        return $this->tipo_ingrediente;
+    public function getQuantidade() {
+        return $this->quantidade;
     }
 
-    public function getLocalizacao() {
+    public function getOrigem() {
         return $this->localizacao;
     }
 
@@ -45,8 +45,8 @@ class Ingrediente {
         $this->nome = $nome;
     }
 
-    public function setTipoIngrediente($tipo_ingrediente) {
-        $this->tipo_ingrediente = $tipo_ingrediente;
+    public function setQuantidade($tipo_ingrediente) {
+        $this->quantidade = $tipo_ingrediente;
     }
 
     public function setLocalizacao($localizacao) {

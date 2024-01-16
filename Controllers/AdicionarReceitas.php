@@ -1,22 +1,25 @@
 <?php
 
-require_once (__DIR__."/ReceitaCompleta.php");
+require_once (__DIR__."/../Classes/Database.php");
+use Classes\Database;
+
+require_once (__DIR__."/../Classes/ReceitaCompleta.php");
 use Classes\ReceitaCompleta;
 
-require_once (__DIR__."/Ingredientes.php");
+require_once (__DIR__."/../Classes/Utilizador.php");
+use Classes\Utilizador;
+
+require_once (__DIR__."/../Classes/Ingrediente.php");
 use Classes\Ingrediente;
 
-require_once (__DIR__."/Anexo.php");
+require_once (__DIR__."/../Classes/Anexo.php");
 use Classes\Anexo;
 
-require_once (__DIR__."/Categoria.php");
+require_once (__DIR__."/../Classes/Categoria.php");
 use Classes\Categoria;
-
-$utilizador = $_SESSION['utilizador'];
 
 // Verifica se a requisição é do tipo POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Obtém os dados do formulário
     $titulo = $_POST['titulo'];
     $modoPreparo = $_POST['modoPreparo'];
@@ -24,11 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dadosCategoria = $_POST['categorias'];
 
     // Lista de ingredientes (vem como uma string JSON)
-    $Dadosingredientes = json_decode($_POST['ingredientes'], true);
+    $Dadosingredientes = isset($_POST['ingredientes']) ? json_decode($_POST['ingredientes'], true) : [];
 
     // Processa o upload do anexo, se fornecido
-    $anexoDir = "diretorio_de_anexos/"; // Substitua pelo seu diretório desejado
-    $anexoNome = $_FILES['anexo']['name'];
+    $anexoDir = ".\.\uploads\C"; 
+    $anexoNome = isset($_FILES['anexo']['name']) ? $_FILES['anexo']['name'] : '';
 
     if ($anexoNome != "") {
         $anexoDestino = $anexoDir . $anexoNome;
@@ -37,26 +40,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $anexoDestino = null;
     }
 
-   
+    $ingredientes = []; 
 
-    $ingredientes = [];
     foreach ($Dadosingredientes as $dadosIngrediente) {
-        $ingrediente = new Ingrediente(
+    // Criar uma nova instância de Ingrediente dentro do loop
+    $ingrediente = new Ingrediente(
         null,
         $dadosIngrediente['nome'],
         $dadosIngrediente['quantidade'],
         $dadosIngrediente['Origem'],
         $dadosIngrediente['valor']
     );
-    $ingredientes[] = $ingrediente;
-}
 
+        // Adicionar o objeto Ingrediente ao array $ingredientes
+        $ingredientes[] = $ingrediente;
+    }
     $anexo = new Anexo(
-            null,
-            null,
-            $anexoDestino,
-            null,
-            null
+        null,
+        null,
+        $anexoDestino,
+        null,
+        null
     );
 
     $categoria = new Categoria(
@@ -70,22 +74,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $modoPreparo,
         null, // A data pode ser definida no backend ou no banco de dados
         null, // Favorito - você pode ajustar conforme necessário
-        $ingrediente,
+        $ingredientes,
         $anexo,
-        null, // Descrição - você pode ajustar conforme necessário
+        $notas, 
         null, // Data da descrição - você pode ajustar conforme necessário
         null, // Comentários - você pode ajustar conforme necessário
         $categoria, // Categorias - você pode ajustar conforme necessário
-        $utilizador->getUserId() // User - você pode ajustar conforme necessário
+        null
     );
 
-    
+    var_dump($receita);
 
-    // Exemplo de retorno para o frontend (você pode ajustar conforme necessário)
+    $database = new Database();
+    $database->connect();
+
+    $database->adicionarReceita($receita);
+
     $response = array("status" => "success", "message" => "Receita adicionada com sucesso!");
     echo json_encode($response);
 } else {
-    // Se a requisição não for do tipo POST, retorna um erro
     $response = array("status" => "error", "message" => "Método de requisição inválido.");
     echo json_encode($response);
 }

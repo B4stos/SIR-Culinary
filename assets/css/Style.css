@@ -5,7 +5,7 @@ body {
   background-image: url('./../images/Temp/background2_1.jpg');
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   font-family: 'Oswald', sans-serif;  
 }
 
@@ -469,8 +469,6 @@ background: #eee;
   background-image: url('./../images/Temp/background2_1.jpg');
 }
 
-
-
 .footer {
   background-color: grey;
 }
@@ -660,3 +658,9 @@ color: aquamarine;
   object-fit: contain; /* Para manter a proporção da imagem sem distorção */
 }
 
+.modal-content {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: url('./../images/Temp/background2_1.jpg');
+  color: #333; /* Ajuste a cor do texto conforme necessário */
+}

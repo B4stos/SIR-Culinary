@@ -25,7 +25,7 @@ function atualizarReceitas() {
             if (data && data.length > 0) {
                let html="";
                 $.each(data, function(index, receita) {
-                        html += '<div class="col-md-4 masonry-item">' +
+                        html += '<div class="col-md-4 masonry-item testJs" data-user-id="' + receita.user_id + '">' +
                         '<div class="d-flex receita-card justify-content-center align-items-center ">' +
                         '<img src="' + receita.imagem_anexo + '" class="receita-card-img-top" alt="Imagem da Receita">' +
                         '<div class="receita-card-body">' +

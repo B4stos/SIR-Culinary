@@ -17,6 +17,17 @@ class Anexo {
         $this->user_id = $user_id;
     }
 
+    public function verificarTipoFicheiro() {
+        $extensao = pathinfo($this->ficheiro, PATHINFO_EXTENSION);
+    
+        if ($extensao === 'jpg' || $extensao === 'png') {
+            $this->tipo = 'I';
+        } elseif ($extensao === 'mp4') {
+            $this->tipo = 'V';
+        } else {
+            $this->tipo = null;
+        }
+    }
 
     public function getAnexoId() {
         return $this->anexo_id;

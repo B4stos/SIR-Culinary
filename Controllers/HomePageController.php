@@ -27,6 +27,7 @@ class HomePageController{
         $utilizador = $_SESSION['utilizador'];
         $listareceitascard = $this->database->getReceitasCards();
         $listacategorias = $this->database->getAllCategorias();
+        $Receitacompleta = $this->database->getReceitaCompletaPorId(94);
         
         include __DIR__."/../Pages/HomePage.php";   
 

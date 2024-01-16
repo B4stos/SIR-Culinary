@@ -28,7 +28,7 @@ class Login {
             $storedPassword = $result['password'];
 
             if (password_verify($password, $storedPassword)) {
-                return true; 
+                return $result['user_id'];
             }
         }
     

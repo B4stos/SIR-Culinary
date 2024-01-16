@@ -8,6 +8,7 @@ if (isset($_SESSION['utilizador'])) {
 
     $utilizador = $_SESSION['utilizador'];
     $utilizador->setDefaultImagemUsuario();
+    return $utilizador->getUserId();
     
 } else {
 
