@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap">
   <link href="./assets/css/Style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="./jsc/main/globals.js"></script>
 
  
 </head>
@@ -41,7 +42,11 @@
                 <div style="text-align: center; margin-right: 30px" type="button" class="custom-buttonH" data-bs-toggle="modal" data-bs-target="#CriarReceita">
                     <i class="fa-solid fa-file-circle-plus fa-1x"></i>
                 </div>
-                <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php echo $utilizador->getImagem();?>" alt="">       
+                <img class="rounded-circle me-3 max-width-user_image_nav" src="<?php
+
+use Classes\Utilizador;
+
+ echo $utilizador->getImagem();?>" alt="">       
             </form>
         </div>
     </nav>
@@ -98,7 +103,7 @@
 
 
 <?php
-
+  
         #$status = session_status();
 
         #if ($status == PHP_SESSION_ACTIVE) {
@@ -109,7 +114,7 @@
         #    echo "As sessões estão desabilitadas.";
         #}
 
-        #session_destroy();
+    #session_destroy();
  ?>
 
 
@@ -127,18 +132,18 @@
                         <input type="text" class="form-control" id="titulo" name="titulo" required>
                     </div>
                     <div id="ingredientesContainer" class="mb-3">
-                        <label for="ingredientes" class="form-label">Ingredientes</label>
+                        <label class="form-label">Ingredientes</label>
                         <div class="ingredientes">
-                        <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="idnomeIngrediente" name="nomeIngredientes[]" placeholder="Nome do Ingrediente" required>
-                        <input type="text" class="form-control" name="quantidade[]" placeholder="Quantidade" required>
-                        <input type="text" class="form-control" name="valor[]" placeholder="Valor" required>
-                        <input type="text" class="form-control" name="Origem[]" placeholder="Origem" required>
-                        <button class="btn btn-outline-secondary" type="button" name="adicionarIngrediente">Adicionar</button>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="idnomeIngrediente" name="nomeIngredientes[]" placeholder="Nome do Ingrediente" required>
+                                <input type="text" class="form-control" name="quantidade[]" placeholder="Quantidade" required>
+                                <input type="text" class="form-control" name="valor[]" placeholder="Valor" required>
+                                <input type="text" class="form-control" name="Origem[]" placeholder="Origem" required>
+                                <button class="btn btn-outline-secondary" type="button" name="adicionarIngrediente">Adicionar</button>
+                            </div>
+                        </div>
+                        <ul id="listaIngredientes" class="list-group mt-3"></ul>
                     </div>
-                </div>
-                <ul id="listaIngredientes" class="list-group mt-3"></ul>
-                </div>
                     <div class="mb-3">
                         <label for="modoPreparo" class="form-label">Modo de Preparo</label>
                         <textarea class="form-control" id="modoPreparo" name="modoPreparo" rows="3" required></textarea>
@@ -156,6 +161,7 @@
                         <textarea class="form-control" id="categorias" name="categorias" rows="3" required></textarea>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                         <button type="button" class="btn btn-primary" id="btnAdicionarReceita">Adicionar Receita</button>
                     </div>
                 </form>
@@ -163,6 +169,7 @@
         </div>
     </div>
 </div>
+
 
 
 </main>

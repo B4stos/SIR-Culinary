@@ -25,7 +25,7 @@ class ReceitaCard {
     }
 
     public function setDefaultImagemAnexo() {
-        if ($this->imagem_anexo == null) {
+       if ($this->imagem_anexo == null) {
             $this->imagem_anexo = '.\assets\images\Imagensr\base\baseImagenReceitaCard.jpg';
         }
     }

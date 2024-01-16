@@ -1,13 +1,22 @@
+src="./jsc/main/globals.js">
+console.log('Script Ingredientes.js carregado.');
 $(document).ready(function() {
     // Array para armazenar os ingredientes
-    var ingredientesArray = [];
+    ingredientesArray = [];
+
+    // Cache dos seletores para melhor desempenho
+    var nomeIngredienteInput = $('#idnomeIngrediente');
+    var quantidadeInput = $('input[name="quantidade[]"]');
+    var valorInput = $('input[name="valor[]"]');
+    var origemInput = $('input[name="Origem[]"]');
+    var listaIngredientes = $('#listaIngredientes');
 
     // Função para adicionar um novo ingrediente à lista
     function adicionarIngrediente() {
-        var nome = $('#idnomeIngrediente').val();
-        var quantidade = $('input[name="quantidade[]"]').val();
-        var valor = $('input[name="valor[]"]').val();
-        var origem = $('input[name="Origem[]"]').val();
+        var nome = nomeIngredienteInput.val();
+        var quantidade = quantidadeInput.val();
+        var valor = valorInput.val();
+        var origem = origemInput.val();
 
         // Validar se o campo de nome do ingrediente está preenchido
         if (nome) {
@@ -15,10 +24,10 @@ $(document).ready(function() {
             ingredientesArray.push({ nome: nome, quantidade: quantidade, valor: valor, origem: origem });
 
             // Limpar os campos do formulário
-            $('#idnomeIngrediente').val('');
-            $('input[name="quantidade[]"]').val('');
-            $('input[name="valor[]"]').val('');
-            $('input[name="Origem[]"]').val('');
+            nomeIngredienteInput.val('');
+            quantidadeInput.val('');
+            valorInput.val('');
+            origemInput.val('');
 
             // Atualizar a lista de ingredientes na interface
             atualizarListaIngredientes();
@@ -39,7 +48,7 @@ $(document).ready(function() {
     // Função para atualizar a lista de ingredientes na interface
     function atualizarListaIngredientes() {
         // Limpar a lista existente
-        $('#listaIngredientes').empty();
+        listaIngredientes.empty();
 
         // Adicionar cada ingrediente à lista
         ingredientesArray.forEach(function(ingrediente, index) {
@@ -49,7 +58,7 @@ $(document).ready(function() {
             });
             listItem.append(removerButton);
 
-            $('#listaIngredientes').append(listItem);
+            listaIngredientes.append(listItem);
         });
     }
 

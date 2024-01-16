@@ -24,7 +24,7 @@ class ReceitaCompleta {
     public $user;
 
 
-    public function __construct($receita_id,$titulo,$modo_preparo,$data_preparo,$favorito,$ingredientes,$anexos,$descricao,$datadescricao,$comentarios, $categorias, $user ) {
+    public function __construct($receita_id,$titulo,$modo_preparo,$data_preparo,$favorito,$ingredientes,$anexos,$descricao,$datadescricao,$comentarios, $categorias, $user) {
 
         $this->receita_id = $receita_id;
         $this->titulo = $titulo;
@@ -38,6 +38,10 @@ class ReceitaCompleta {
         $this->comentarios = $comentarios;
         $this->categorias = $categorias;
         $this->user = $user;
+    }
+
+    public function setDataPreparoAtual() {
+        $this->data_preparo = date('Y-m-d H:i:s');
     }
 
     public function getReceitaId() {

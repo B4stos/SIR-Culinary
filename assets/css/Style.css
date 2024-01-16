@@ -5,7 +5,7 @@ body {
   background-image: url('./../images/Temp/background2_1.jpg');
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   font-family: 'Oswald', sans-serif;  
 }
 
