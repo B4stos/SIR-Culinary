@@ -201,7 +201,7 @@ class Database {
             return $receita;
         }
     
-        return null; // Retorna null se não encontrar a receita
+        return null; 
     }
 
     public function getAnexosPorReceitaId($receitaId) {
@@ -437,7 +437,6 @@ class Database {
             $utilizador = $_SESSION['utilizador'];
             $userId = $utilizador->getUserId();
     
-            // Inserir a receita principal
             $stmtReceita = $this->conn->prepare("INSERT INTO Receitas (titulo, modo_preparo, data_preparo, user_id) VALUES (?, ?, ?, ?)");
             $resultReceita = $stmtReceita->execute([$titulo, $modoPreparo, $dataPreparo, $userId]);
     
@@ -445,10 +444,8 @@ class Database {
                 throw new PDOException("Erro ao inserir na tabela Receitas.");
             }
     
-            // Obter o ID da última receita inserida
             $receitaId = $this->conn->lastInsertId();
     
-            // Inserir os ingredientes associados a essa receita
             $stmtIngrediente = $this->conn->prepare("INSERT INTO Ingredientes (nome, quantidade_na_receita, localizacao, valor, receita_id) VALUES (?, ?, ?, ?, ?)");
             foreach ($ingredientes as $ingrediente) {
                 $ingredienteNome = $ingrediente->getNome();
@@ -483,18 +480,17 @@ class Database {
             $categoriaExistente = $stmtCategoriaExistente->fetch(PDO::FETCH_ASSOC);
 
             if ($categoriaExistente) {
-            // Utilizar a categoria existente
+
             $categoriaId = $categoriaExistente['categoria_id'];
             } else {
-            // Inserir a categoria apenas se não existir
+      
             $stmtCategoria = $this->conn->prepare("INSERT INTO Categorias (nome) VALUES (?)");
             $stmtCategoria->execute([$categorianome]);
 
-            // Obter o ID da última categoria inserida
+           
             $categoriaId = $this->conn->lastInsertId();
              }
 
-            // Inserir o relacionamento na tabela Receitas_Categorias
             $stmtReceitaCategoria = $this->conn->prepare("INSERT INTO Receitas_Categorias (receita_id, categoria_id) VALUES (?, ?)");
             $stmtReceitaCategoria->execute([$receitaId, $categoriaId]);
 
@@ -536,7 +532,7 @@ class Database {
         $receita = $this->getReceitaPorId($receitaId);
     
         if (!$receita) {
-            return null; // Retorna null se a receita não for encontrada
+            return null;
         }
    
         $ingredientes = $this->getIngredientesPorReceitaId($receitaId);

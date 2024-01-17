@@ -112,11 +112,9 @@
             <div class="col-md-6 mb-3">
               <img src="" class="img-fluid" alt="Imagem da Receita">
             </div>
-            <!-- Seção dos Detalhes (lado direito) -->
             <div class="col-md-6">
             <p class="mb-4">Utilizador:</p>
             <p class="mb-4">Ingredientes:</p>
-              <!-- Adicione outros elementos conforme necessário -->
             </div>
           </div>
           <div class="row">

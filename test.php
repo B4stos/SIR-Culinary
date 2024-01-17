@@ -26,7 +26,6 @@ class test
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-            // Exibir os resultados
             echo "<table border='1'>";
             echo "<tr><th>User ID</th><th>First Name</th><th>Last Name</th><th>Email</th></tr></th><th>password</th></tr>";
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
