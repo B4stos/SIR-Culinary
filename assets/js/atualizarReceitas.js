@@ -25,7 +25,7 @@ function atualizarReceitas() {
             if (data && data.length > 0) {
                let html="";
                 $.each(data, function(index, receita) {
-                        html += '<div class="col-md-4 masonry-item testJs" data-user-id="' + receita.user_id + '">' +
+                        html += '<div class="col-md-4 masonry-item testJs" data-bs-toggle="modal" data-bs-target="#receitaModal" data-user-id="' + receita.id_receita + '">' +
                         '<div class="d-flex receita-card justify-content-center align-items-center ">' +
                         '<img src="' + receita.imagem_anexo + '" class="receita-card-img-top" alt="Imagem da Receita">' +
                         '<div class="receita-card-body">' +
@@ -33,7 +33,7 @@ function atualizarReceitas() {
                         '<p class="receita-card-text">Categorias:</p>' +
                         '<p class="receita-card-text" style="margin-bottom: 60px;">' + receita.nome_categoria + '</p>' +
                         '<img class="rounded-circle max-width-user_image" src="' + receita.imagem_usuario + '" alt="user imagem">' +
-                        '<p class="receita-card-text">' + receita.first_name + '</p>' +
+                        '<p class="receita-card-text">' + receita.first_name +'</p>' +
                         '<p class="receita-card-text">' + receita.data + '</p>' +
                         '</div>' +
                         '</div>' +
