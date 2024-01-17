@@ -1,5 +1,4 @@
 src="./jsc/main/globals.js">
-console.log('Script Ingredientes.js carregado.');
 $(document).ready(function() {
     // Array para armazenar os ingredientes
     ingredientesArray = [];

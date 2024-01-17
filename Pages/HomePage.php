@@ -98,42 +98,41 @@
         </div>
     </section>
 
-    <script>
-    $(document).ready(function() {
-        // Adiciona um ouvinte de eventos para clicar nas cards
-        $('.testJs').click(function() {
-            // Recupera o valor do atributo data-user-id da card clicada
-            var userId = $(this).data('user-id');
 
-            // Abre o modal de teste
-            abrirModal();
-        });
-
-        // Função para abrir o modal de teste
-        function abrirModal() {
-            // Lógica para abrir o modal de teste
-            $('#exemploModal').modal('show');
-        }
-    });
-</script>
-
-<div class="modal fade" id="exemploModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal de Teste</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+    <div class="modal fade" id="receitaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?php #echo $receitaCompleta->getTitulo(); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <img src="" class="img-fluid" alt="Imagem da Receita">
             </div>
-            <div class="modal-body">
-                <!-- Conteúdo do modal aqui -->
-                <p>Conteúdo do modal de teste.</p>
+            <!-- Seção dos Detalhes (lado direito) -->
+            <div class="col-md-6">
+            <p class="mb-4">Utilizador:</p>
+            <p class="mb-4">Ingredientes:</p>
+              <!-- Adicione outros elementos conforme necessário -->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
+          </div>
+          <div class="row">
+          <p class="mb-4">Modo de preparo</p>
+          <p class="mb-4">Notas</p> 
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+      </div>
     </div>
+  </div>
 </div>
+
+
+
 
 
 <?php
@@ -228,6 +227,7 @@ crossorigin="anonymous">
 <script src="./assets/js/pesquisarReceitas.js"></script>
 <script src="./jsc/main/IngredientesReceitas.js"></script>
 <script src="./jsc/main/CriarReceitas.js"></script>
+<script src="./jsc/main/fromreceita.js"></script>
 
 </body>
 
