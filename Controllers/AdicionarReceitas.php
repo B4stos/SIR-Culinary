@@ -18,18 +18,18 @@ use Classes\Anexo;
 require_once (__DIR__."/../Classes/Categoria.php");
 use Classes\Categoria;
 
-// Verifica se a requisição é do tipo POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtém os dados do formulário
+  
     $titulo = $_POST['titulo'];
     $modoPreparo = $_POST['modoPreparo'];
     $notas = $_POST['notas'];
     $dadosCategoria = $_POST['categorias'];
 
-    // Lista de ingredientes (vem como uma string JSON)
+    
     $Dadosingredientes = isset($_POST['ingredientes']) ? json_decode($_POST['ingredientes'], true) : [];
 
-    // Processa o upload do anexo, se fornecido
+
     $anexoDir = ".\.\uploads\C"; 
     $anexoNome = isset($_FILES['anexo']['name']) ? $_FILES['anexo']['name'] : '';
 
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ingredientes = []; 
 
     foreach ($Dadosingredientes as $dadosIngrediente) {
-    // Criar uma nova instância de Ingrediente dentro do loop
+
     $ingrediente = new Ingrediente(
         null,
         $dadosIngrediente['nome'],
@@ -51,8 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dadosIngrediente['Origem'],
         $dadosIngrediente['valor']
     );
-
-        // Adicionar o objeto Ingrediente ao array $ingredientes
         $ingredientes[] = $ingrediente;
     }
     $anexo = new Anexo(
@@ -72,14 +70,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         null, 
         $titulo,
         $modoPreparo,
-        null, // A data pode ser definida no backend ou no banco de dados
-        null, // Favorito - você pode ajustar conforme necessário
+        null, 
+        null,
         $ingredientes,
         $anexo,
         $notas, 
-        null, // Data da descrição - você pode ajustar conforme necessário
-        null, // Comentários - você pode ajustar conforme necessário
-        $categoria, // Categorias - você pode ajustar conforme necessário
+        null, 
+        null, 
+        $categoria, 
         null
     );
 
