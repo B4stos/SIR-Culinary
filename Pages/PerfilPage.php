@@ -25,9 +25,9 @@
         }
 
         .perfil-navbar a {
-            color: #000000 !important; /* Set to the desired font color */
+            color: #000000 !important; 
             font-family: 'Oswald', sans-serif;
-            font-size: 17px; /* Set to the desired font size */
+            font-size: 17px; 
             font-weight: 600;
         }
 
@@ -52,7 +52,6 @@
 
 <nav class="navbar navbar-expand-lg fixed-top perfil-navbar">
     <a class="navbar-brand text-light" href="Homepage.php">
-        <!-- Back button arrow -->
         &#8592; Voltar
     </a>
     <ul class="nav nav-pills mx-auto nav-underline">
@@ -72,7 +71,7 @@
                 <div class="tab-pane fade show active" id="perfil">
                     <?php if (!empty($users)): ?>
                         <div class="profile-container">
-                            <?php $user = $users[0]; // Access the first user ?>
+                            <?php $user = $users[0]; ?>
                             <img src="imgsupload/<?= basename($user->getImagem()); ?>" alt="Profile Image" class="profile-image">
                             <div class="profile-details">
                                 <div class="profile-name" style="font-family: 'Oswald', sans-serif;">
@@ -86,9 +85,6 @@
                                     <span style="font-family: 'Oswald', sans-serif; color: #000000;"><strong>Contacto:</strong></span>
                                     <?php echo $user->getTelefone(); ?>
                                 </p>
-                                <!-- Add more user details as needed -->
-
-                                <!-- "Editar Perfil" Button -->
                                 <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#editarPerfilModal">
                                     Editar Perfil
                                 </button>
@@ -111,9 +107,7 @@
                                                 <?php echo $errorMsg; ?>
                                             </div>
                                         <?php endif; ?>
-                                        <!-- Form for editing user profile -->
-                                        <form action="" method="POST" enctype="multipart/form-data"> <!-- Replace "updateProfile.php" with the actual PHP script to handle form submission -->
-                                            <!-- File upload input for the image -->
+                                        <form action="" method="POST" enctype="multipart/form-data"> 
                                             <div class="form-group">
                                                 <label for="editImagem">Profile Image</label>
                                                 <input type="file" class="form-control-file" id="editImagem" name="editImagem" accept=".png, .jpg, .jpeg">
@@ -134,8 +128,6 @@
                                                 <label for="editTelefone">Phone</label>
                                                 <input type="tel" class="form-control" id="editTelefone" name="editTelefone" value="<?php echo $user->getTelefone(); ?>">
                                             </div>
-                                            <!-- Add more form fields as needed -->
-
                                             <button type="submit" class="btn btn-outline-success" name="saveChanges">
                                                 Save Changes
                                             </button>
@@ -157,7 +149,6 @@
     </div>
 </div>
 
-<!-- Bootstrap JS and Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
