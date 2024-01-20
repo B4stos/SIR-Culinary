@@ -587,8 +587,8 @@ color: aquamarine;
 .receita-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid #ddd; 
+  background-color: #fff; 
   border-radius: 8px; 
   transition: transform 0.3s ease-in-out; 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); 
@@ -596,7 +596,7 @@ color: aquamarine;
 
 .receita-card:hover {
   transform: scale(1.05); 
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15);
 }
 
 .receita-card-img-top {
@@ -648,6 +648,7 @@ color: aquamarine;
 
 .max-width-user_image {
   max-width: 70%;
+  max-height: 40px; 
   object-fit: contain; 
 }
 
@@ -661,5 +662,5 @@ color: aquamarine;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-image: url('./../images/Temp/background2_1.jpg');
-  color: #333; 
+  color: #333;
 }
