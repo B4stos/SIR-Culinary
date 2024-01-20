@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Dadosingredientes = isset($_POST['ingredientes']) ? json_decode($_POST['ingredientes'], true) : [];
 
 
-    $anexoDir = ".\.\uploads\C"; 
+    $anexoDir = ".\.\uploads\D";
     $anexoNome = isset($_FILES['anexo']['name']) ? $_FILES['anexo']['name'] : '';
 
     if ($anexoNome != "") {
